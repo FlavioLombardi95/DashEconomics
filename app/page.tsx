@@ -22,7 +22,7 @@ export default function Dashboard() {
       case 'imports':
         return <Imports />
       case 'news':
-        return <News />
+        return <News onNavigateToSection={setActiveSection} />
       default:
         return <Overview />
     }

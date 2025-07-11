@@ -111,7 +111,7 @@ export async function getEconomicNews(): Promise<NewsItem[]> {
         title: 'Federal Reserve mantiene i tassi di interesse invariati al 5.25-5.50%',
         category: 'Politica Monetaria',
         date: new Date().toISOString().split('T')[0],
-        url: 'https://www.federalreserve.gov/',
+        url: '#',
         source: 'Federal Reserve'
       },
       {
@@ -119,7 +119,7 @@ export async function getEconomicNews(): Promise<NewsItem[]> {
         title: 'PIL cinese cresce del 5.2% nel 2023, superando le aspettative',
         category: 'Crescita',
         date: new Date(Date.now() - 86400000).toISOString().split('T')[0],
-        url: 'https://www.stats.gov.cn/',
+        url: '#',
         source: 'National Bureau of Statistics of China'
       },
       {
@@ -127,7 +127,7 @@ export async function getEconomicNews(): Promise<NewsItem[]> {
         title: 'Industria automobilistica tedesca registra crescita del 3.8%',
         category: 'Industria',
         date: new Date(Date.now() - 172800000).toISOString().split('T')[0],
-        url: 'https://www.vda.de/',
+        url: '#',
         source: 'VDA - German Association of the Automotive Industry'
       },
       {
@@ -135,7 +135,7 @@ export async function getEconomicNews(): Promise<NewsItem[]> {
         title: 'Export italiano aumenta del 2.1% nel settore agroalimentare',
         category: 'Export',
         date: new Date(Date.now() - 259200000).toISOString().split('T')[0],
-        url: 'https://www.istat.it/',
+        url: '#',
         source: 'ISTAT'
       },
       {
@@ -143,8 +143,48 @@ export async function getEconomicNews(): Promise<NewsItem[]> {
         title: 'RBI mantiene il tasso di repo al 6.5% per il sesto trimestre consecutivo',
         category: 'Politica Monetaria',
         date: new Date(Date.now() - 345600000).toISOString().split('T')[0],
-        url: 'https://www.rbi.org.in/',
+        url: '#',
         source: 'Reserve Bank of India'
+      },
+      {
+        country: 'Giappone',
+        title: 'Settore automotive giapponese registra crescita del 4.2%',
+        category: 'Industria',
+        date: new Date(Date.now() - 432000000).toISOString().split('T')[0],
+        url: '#',
+        source: 'Ministry of Economy, Trade and Industry'
+      },
+      {
+        country: 'Regno Unito',
+        title: 'Servizi finanziari britannici mostrano resilienza post-Brexit',
+        category: 'Industria',
+        date: new Date(Date.now() - 518400000).toISOString().split('T')[0],
+        url: '#',
+        source: 'Office for National Statistics'
+      },
+      {
+        country: 'Francia',
+        title: 'Settore lusso francese registra crescita record del 8.7%',
+        category: 'Export',
+        date: new Date(Date.now() - 604800000).toISOString().split('T')[0],
+        url: '#',
+        source: 'Institut National de la Statistique'
+      },
+      {
+        country: 'Canada',
+        title: 'Settore energetico canadese beneficia dei prezzi elevati',
+        category: 'Industria',
+        date: new Date(Date.now() - 691200000).toISOString().split('T')[0],
+        url: '#',
+        source: 'Statistics Canada'
+      },
+      {
+        country: 'Brasile',
+        title: 'Export agricolo brasiliano raggiunge nuovo record',
+        category: 'Export',
+        date: new Date(Date.now() - 777600000).toISOString().split('T')[0],
+        url: '#',
+        source: 'Instituto Brasileiro de Geografia e Estatística'
       }
     ]
 

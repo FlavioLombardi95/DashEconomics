@@ -1,10 +1,14 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Newspaper, RefreshCw } from 'lucide-react'
+import { Newspaper, RefreshCw, ExternalLink } from 'lucide-react'
 import { getEconomicNews, NewsItem } from '../lib/api'
 
-export default function News() {
+interface NewsProps {
+  onNavigateToSection?: (section: string) => void
+}
+
+export default function News({ onNavigateToSection }: NewsProps) {
   const [newsData, setNewsData] = useState<NewsItem[]>([])
   const [filteredNews, setFilteredNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -41,6 +45,29 @@ export default function News() {
       (!keyword || n.title.toLowerCase().includes(keyword.toLowerCase()))
     )
     setFilteredNews(filtered)
+  }
+
+  const handleNewsClick = (news: NewsItem) => {
+    // Naviga alla sezione appropriata della dashboard
+    if (onNavigateToSection) {
+      switch (news.category) {
+        case 'Politica Monetaria':
+        case 'Crescita':
+          onNavigateToSection('overview')
+          break
+        case 'Industria':
+          onNavigateToSection('industries')
+          break
+        case 'Export':
+          onNavigateToSection('exports')
+          break
+        case 'Import':
+          onNavigateToSection('imports')
+          break
+        default:
+          onNavigateToSection('overview')
+      }
+    }
   }
 
   const countries = Array.from(new Set(newsData.map(n => n.country)))
@@ -123,16 +150,15 @@ export default function News() {
           </div>
         )}
         {filteredNews.map((news, idx) => (
-          <a
+          <div
             key={idx}
-            href={news.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card flex flex-col gap-2 hover:shadow-lg transition-shadow"
+            className="card flex flex-col gap-2 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => handleNewsClick(news)}
           >
             <div className="flex items-center gap-2">
               <Newspaper className="w-5 h-5 text-blue-600" />
               <span className="font-semibold text-gray-900">{news.title}</span>
+              <ExternalLink className="w-4 h-4 text-gray-400 ml-auto" />
             </div>
             <div className="flex gap-4 text-xs text-gray-500">
               <span>{news.country}</span>
@@ -142,7 +168,10 @@ export default function News() {
             <div className="text-xs text-gray-400">
               Fonte: {news.source}
             </div>
-          </a>
+            <div className="text-xs text-blue-600 font-medium">
+              Clicca per vedere i dati correlati →
+            </div>
+          </div>
         ))}
       </div>
 

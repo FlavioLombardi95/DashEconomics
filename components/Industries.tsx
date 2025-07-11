@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Factory, BarChart3, PieChart, TrendingUp, RefreshCw } from 'lucide-react'
 import { getIndustryData, countryCodes, IndustryData } from '../lib/api'
 
-const countries = ['Stati Uniti', 'Cina', 'Germania']
+const countries = ['Stati Uniti', 'Cina', 'Germania', 'Giappone', 'India', 'Regno Unito', 'Francia', 'Italia', 'Canada', 'Brasile']
 const chartTypes = ['bar', 'pie', 'area']
 
 export default function Industries() {

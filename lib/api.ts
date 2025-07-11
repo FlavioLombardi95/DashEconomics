@@ -194,6 +194,90 @@ export async function getIndustryData(countryCode: string): Promise<IndustryData
       { name: 'Costruzioni', value: 1.9, color: '#F97316', lastUpdated: '2023', source: 'Federal Statistical Office' },
       { name: 'Sanità', value: 0.5, color: '#EC4899', lastUpdated: '2023', source: 'Federal Statistical Office' },
       { name: 'Altri', value: 0.2, color: '#6B7280', lastUpdated: '2023', source: 'Federal Statistical Office' }
+    ],
+    'JP': [
+      { name: 'Automotive', value: 22.5, color: '#3B82F6', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Elettronica', value: 18.3, color: '#10B981', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Macchinari', value: 15.7, color: '#F59E0B', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Servizi', value: 14.2, color: '#EF4444', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Chimica', value: 12.1, color: '#8B5CF6', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Acciaio', value: 9.8, color: '#06B6D4', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Farmaceutica', value: 7.4, color: '#84CC16', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Agricoltura', value: 3.1, color: '#F97316', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Tessile', value: 2.8, color: '#EC4899', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' },
+      { name: 'Altri', value: 3.1, color: '#6B7280', lastUpdated: '2023', source: 'Ministry of Economy, Trade and Industry' }
+    ],
+    'IN': [
+      { name: 'Servizi IT', value: 24.6, color: '#3B82F6', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Agricoltura', value: 18.9, color: '#10B981', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Manifatturiero', value: 15.3, color: '#F59E0B', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Servizi', value: 12.7, color: '#EF4444', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Farmaceutica', value: 9.5, color: '#8B5CF6', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Automotive', value: 7.2, color: '#06B6D4', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Tessile', value: 5.8, color: '#84CC16', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Chimica', value: 3.4, color: '#F97316', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Gioielli', value: 1.8, color: '#EC4899', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' },
+      { name: 'Altri', value: 0.8, color: '#6B7280', lastUpdated: '2023', source: 'Ministry of Statistics and Programme Implementation' }
+    ],
+    'GB': [
+      { name: 'Servizi Finanziari', value: 26.8, color: '#3B82F6', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Tecnologia', value: 16.4, color: '#10B981', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Servizi', value: 15.2, color: '#F59E0B', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Farmaceutica', value: 13.2, color: '#EF4444', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Automotive', value: 11.7, color: '#8B5CF6', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Aeronautica', value: 9.3, color: '#06B6D4', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Chimica', value: 7.8, color: '#84CC16', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Agricoltura', value: 5.1, color: '#F97316', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Tessile', value: 3.9, color: '#EC4899', lastUpdated: '2023', source: 'Office for National Statistics' },
+      { name: 'Altri', value: 3.0, color: '#6B7280', lastUpdated: '2023', source: 'Office for National Statistics' }
+    ],
+    'FR': [
+      { name: 'Lusso', value: 23.5, color: '#3B82F6', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Automotive', value: 18.7, color: '#10B981', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Servizi', value: 16.2, color: '#F59E0B', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Aeronautica', value: 15.2, color: '#EF4444', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Farmaceutica', value: 12.8, color: '#8B5CF6', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Agricoltura', value: 10.3, color: '#06B6D4', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Chimica', value: 8.1, color: '#84CC16', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Tecnologia', value: 5.7, color: '#F97316', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Tessile', value: 3.2, color: '#EC4899', lastUpdated: '2023', source: 'Institut National de la Statistique' },
+      { name: 'Altri', value: 0.7, color: '#6B7280', lastUpdated: '2023', source: 'Institut National de la Statistique' }
+    ],
+    'IT': [
+      { name: 'Moda', value: 25.3, color: '#3B82F6', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Automotive', value: 19.1, color: '#10B981', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Agricoltura', value: 16.8, color: '#F59E0B', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Servizi', value: 14.4, color: '#EF4444', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Macchinari', value: 12.4, color: '#8B5CF6', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Farmaceutica', value: 9.7, color: '#06B6D4', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Chimica', value: 6.8, color: '#84CC16', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Tecnologia', value: 4.2, color: '#F97316', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Tessile', value: 3.1, color: '#EC4899', lastUpdated: '2023', source: 'ISTAT' },
+      { name: 'Altri', value: 0.7, color: '#6B7280', lastUpdated: '2023', source: 'ISTAT' }
+    ],
+    'CA': [
+      { name: 'Energia', value: 28.4, color: '#3B82F6', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Automotive', value: 18.7, color: '#10B981', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Servizi', value: 16.2, color: '#F59E0B', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Agricoltura', value: 15.2, color: '#EF4444', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Farmaceutica', value: 9.3, color: '#8B5CF6', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Tecnologia', value: 7.1, color: '#06B6D4', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Chimica', value: 4.8, color: '#84CC16', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Tessile', value: 2.5, color: '#F97316', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Manifatturiero', value: 1.2, color: '#EC4899', lastUpdated: '2023', source: 'Statistics Canada' },
+      { name: 'Altri', value: 0.0, color: '#6B7280', lastUpdated: '2023', source: 'Statistics Canada' }
+    ],
+    'BR': [
+      { name: 'Agricoltura', value: 32.1, color: '#3B82F6', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Minerario', value: 18.9, color: '#10B981', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Servizi', value: 16.3, color: '#F59E0B', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Automotive', value: 14.7, color: '#EF4444', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Tessile', value: 8.5, color: '#8B5CF6', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Chimica', value: 6.2, color: '#06B6D4', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Farmaceutica', value: 3.8, color: '#84CC16', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Tecnologia', value: 2.1, color: '#F97316', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Manifatturiero', value: 1.2, color: '#EC4899', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' },
+      { name: 'Altri', value: 0.2, color: '#6B7280', lastUpdated: '2023', source: 'Instituto Brasileiro de Geografia e Estatística' }
     ]
   }
 

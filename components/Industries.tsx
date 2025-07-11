@@ -1,63 +1,65 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Factory, BarChart3, PieChart, TrendingUp } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Factory, BarChart3, PieChart, TrendingUp, RefreshCw } from 'lucide-react'
+import { getIndustryData, countryCodes, IndustryData } from '../lib/api'
 
-// Dati simulati per le industrie
-const industriesData = {
-  'Stati Uniti': [
-    { name: 'Servizi Finanziari', value: 25.5, color: '#3B82F6' },
-    { name: 'Tecnologia', value: 18.2, color: '#10B981' },
-    { name: 'Sanità', value: 15.8, color: '#F59E0B' },
-    { name: 'Retail', value: 12.1, color: '#EF4444' },
-    { name: 'Manifatturiero', value: 10.5, color: '#8B5CF6' },
-    { name: 'Energia', value: 8.2, color: '#06B6D4' },
-    { name: 'Trasporti', value: 4.8, color: '#84CC16' },
-    { name: 'Agricoltura', value: 2.9, color: '#F97316' },
-    { name: 'Costruzioni', value: 1.8, color: '#EC4899' },
-    { name: 'Altri', value: 0.2, color: '#6B7280' },
-  ],
-  'Cina': [
-    { name: 'Manifatturiero', value: 35.2, color: '#3B82F6' },
-    { name: 'Costruzioni', value: 18.5, color: '#10B981' },
-    { name: 'Servizi', value: 15.3, color: '#F59E0B' },
-    { name: 'Agricoltura', value: 12.8, color: '#EF4444' },
-    { name: 'Tecnologia', value: 8.7, color: '#8B5CF6' },
-    { name: 'Energia', value: 4.2, color: '#06B6D4' },
-    { name: 'Finanziario', value: 3.1, color: '#84CC16' },
-    { name: 'Trasporti', value: 1.5, color: '#F97316' },
-    { name: 'Sanità', value: 0.5, color: '#EC4899' },
-    { name: 'Altri', value: 0.2, color: '#6B7280' },
-  ],
-  'Germania': [
-    { name: 'Manifatturiero', value: 28.4, color: '#3B82F6' },
-    { name: 'Automotive', value: 22.1, color: '#10B981' },
-    { name: 'Servizi', value: 18.7, color: '#F59E0B' },
-    { name: 'Tecnologia', value: 12.3, color: '#EF4444' },
-    { name: 'Finanziario', value: 8.9, color: '#8B5CF6' },
-    { name: 'Energia', value: 4.2, color: '#06B6D4' },
-    { name: 'Agricoltura', value: 2.8, color: '#84CC16' },
-    { name: 'Costruzioni', value: 1.9, color: '#F97316' },
-    { name: 'Sanità', value: 0.5, color: '#EC4899' },
-    { name: 'Altri', value: 0.2, color: '#6B7280' },
-  ],
-}
-
-const countries = Object.keys(industriesData)
+const countries = ['Stati Uniti', 'Cina', 'Germania']
 const chartTypes = ['bar', 'pie', 'area']
 
 export default function Industries() {
   const [selectedCountry, setSelectedCountry] = useState(countries[0])
   const [chartType, setChartType] = useState('bar')
+  const [currentData, setCurrentData] = useState<IndustryData[]>([])
+  const [loading, setLoading] = useState(true)
+  const [lastUpdate, setLastUpdate] = useState<string>('')
 
-  const currentData = industriesData[selectedCountry as keyof typeof industriesData]
+  useEffect(() => {
+    fetchIndustryData()
+  }, [selectedCountry])
+
+  const fetchIndustryData = async () => {
+    setLoading(true)
+    try {
+      const code = countryCodes[selectedCountry]
+      if (code) {
+        const data = await getIndustryData(code)
+        setCurrentData(data)
+        setLastUpdate(new Date().toLocaleString('it-IT'))
+      }
+    } catch (error) {
+      console.error('Errore nel caricamento dati industrie:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Caricamento dati industrie...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900">Industrie Principali</h1>
-        <div className="text-sm text-gray-500">
-          Ultimo aggiornamento: {new Date().toLocaleDateString('it-IT')}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={fetchIndustryData}
+            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Aggiorna
+          </button>
+          <div className="text-sm text-gray-500">
+            Ultimo aggiornamento: {lastUpdate}
+          </div>
         </div>
       </div>
 
@@ -112,6 +114,12 @@ export default function Industries() {
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
           Top 10 Industrie - {selectedCountry}
         </h2>
+        
+        {currentData.length > 0 && (
+          <div className="mb-4 text-sm text-gray-600">
+            Fonte: {currentData[0]?.source} | Ultimo aggiornamento: {currentData[0]?.lastUpdated}
+          </div>
+        )}
         
         {chartType === 'bar' && (
           <div className="space-y-3">
@@ -194,7 +202,7 @@ export default function Industries() {
 
         {chartType === 'area' && (
           <div className="space-y-4">
-            {currentData.map((industry, index) => (
+            {currentData.map((industry) => (
               <div key={industry.name} className="flex items-center">
                 <div className="w-48 text-sm font-medium text-gray-700">
                   {industry.name}
@@ -234,8 +242,8 @@ export default function Industries() {
           <div className="flex items-center">
             <Factory className="w-8 h-8 text-blue-600 mr-3" />
             <div>
-              <p className="font-medium text-gray-900">{currentData[0].name}</p>
-              <p className="text-sm text-gray-600">{currentData[0].value}% del PIL</p>
+              <p className="font-medium text-gray-900">{currentData[0]?.name || 'N/A'}</p>
+              <p className="text-sm text-gray-600">{currentData[0]?.value || 0}% del PIL</p>
             </div>
           </div>
         </div>
@@ -251,7 +259,7 @@ export default function Industries() {
         <div className="card">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Top 3 Settori</h3>
           <div className="space-y-1">
-            {currentData.slice(0, 3).map((industry, index) => (
+            {currentData.slice(0, 3).map((industry) => (
               <div key={industry.name} className="flex justify-between text-sm">
                 <span className="text-gray-700">{industry.name}</span>
                 <span className="font-medium">{industry.value}%</span>

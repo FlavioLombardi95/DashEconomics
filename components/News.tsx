@@ -1,66 +1,77 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Newspaper } from 'lucide-react'
-
-const newsData = [
-  {
-    country: 'Stati Uniti',
-    title: 'La Fed mantiene i tassi invariati',
-    category: 'Politica Monetaria',
-    date: '2024-07-10',
-    url: '#'
-  },
-  {
-    country: 'Cina',
-    title: 'Crescita del PIL superiore alle attese',
-    category: 'Crescita',
-    date: '2024-07-09',
-    url: '#'
-  },
-  {
-    country: 'Germania',
-    title: 'Industria automobilistica in ripresa',
-    category: 'Industria',
-    date: '2024-07-08',
-    url: '#'
-  },
-  {
-    country: 'Italia',
-    title: 'Aumentano le esportazioni di vino',
-    category: 'Export',
-    date: '2024-07-07',
-    url: '#'
-  },
-  {
-    country: 'India',
-    title: 'Nuove riforme fiscali approvate',
-    category: 'Fisco',
-    date: '2024-07-06',
-    url: '#'
-  },
-]
-
-const countries = Array.from(new Set(newsData.map(n => n.country)))
-const categories = Array.from(new Set(newsData.map(n => n.category)))
+import React, { useState, useEffect } from 'react'
+import { Newspaper, RefreshCw } from 'lucide-react'
+import { getEconomicNews, NewsItem } from '../lib/api'
 
 export default function News() {
+  const [newsData, setNewsData] = useState<NewsItem[]>([])
+  const [filteredNews, setFilteredNews] = useState<NewsItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [lastUpdate, setLastUpdate] = useState<string>('')
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [keyword, setKeyword] = useState('')
 
-  const filteredNews = newsData.filter(n =>
-    (!selectedCountry || n.country === selectedCountry) &&
-    (!selectedCategory || n.category === selectedCategory) &&
-    (!keyword || n.title.toLowerCase().includes(keyword.toLowerCase()))
-  )
+  useEffect(() => {
+    fetchNews()
+  }, [])
+
+  useEffect(() => {
+    filterNews()
+  }, [newsData, selectedCountry, selectedCategory, keyword])
+
+  const fetchNews = async () => {
+    setLoading(true)
+    try {
+      const news = await getEconomicNews()
+      setNewsData(news)
+      setLastUpdate(new Date().toLocaleString('it-IT'))
+    } catch (error) {
+      console.error('Errore nel caricamento notizie:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const filterNews = () => {
+    const filtered = newsData.filter(n =>
+      (!selectedCountry || n.country === selectedCountry) &&
+      (!selectedCategory || n.category === selectedCategory) &&
+      (!keyword || n.title.toLowerCase().includes(keyword.toLowerCase()))
+    )
+    setFilteredNews(filtered)
+  }
+
+  const countries = Array.from(new Set(newsData.map(n => n.country)))
+  const categories = Array.from(new Set(newsData.map(n => n.category)))
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Caricamento notizie economiche...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900">Notizie Economiche</h1>
-        <div className="text-sm text-gray-500">
-          Ultimo aggiornamento: {new Date().toLocaleDateString('it-IT')}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={fetchNews}
+            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Aggiorna
+          </button>
+          <div className="text-sm text-gray-500">
+            Ultimo aggiornamento: {lastUpdate}
+          </div>
         </div>
       </div>
 
@@ -107,7 +118,9 @@ export default function News() {
       {/* Lista notizie */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredNews.length === 0 && (
-          <div className="col-span-2 text-center text-gray-500">Nessuna notizia trovata.</div>
+          <div className="col-span-2 text-center text-gray-500">
+            {newsData.length === 0 ? 'Nessuna notizia disponibile.' : 'Nessuna notizia trovata con i filtri selezionati.'}
+          </div>
         )}
         {filteredNews.map((news, idx) => (
           <a
@@ -126,8 +139,30 @@ export default function News() {
               <span>{news.category}</span>
               <span>{news.date}</span>
             </div>
+            <div className="text-xs text-gray-400">
+              Fonte: {news.source}
+            </div>
           </a>
         ))}
+      </div>
+
+      {/* Statistiche */}
+      <div className="card">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Statistiche Notizie</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600">{newsData.length}</div>
+            <div className="text-sm text-gray-600">Notizie totali</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-600">{countries.length}</div>
+            <div className="text-sm text-gray-600">Paesi coperti</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-600">{categories.length}</div>
+            <div className="text-sm text-gray-600">Categorie</div>
+          </div>
+        </div>
       </div>
     </div>
   )

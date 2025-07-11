@@ -62,24 +62,25 @@ export default function Overview() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <h1 className="text-3xl font-bold text-gray-900">Panoramica Globale</h1>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full sm:w-auto">
           <button
             onClick={fetchData}
-            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
           >
             <RefreshCw className="w-4 h-4" />
             Aggiorna
           </button>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 hidden sm:block">
             Ultimo aggiornamento: {lastUpdate}
           </div>
         </div>
+        <div className="text-xs text-gray-500 sm:hidden w-full text-right">Ultimo aggiornamento: {lastUpdate}</div>
       </div>
 
       {/* Statistiche principali */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="card">
           <div className="flex items-center">
             <div className="p-2 bg-blue-100 rounded-lg">
@@ -174,31 +175,33 @@ export default function Overview() {
       {/* Grafico PIL */}
       <div className="card">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Distribuzione PIL - Top 10</h2>
-        <div className="space-y-3">
-          {countriesData
-            .sort((a, b) => b.gdp - a.gdp)
-            .slice(0, 10)
-            .map((country) => {
-              const percentage = totalGDP > 0 ? (country.gdp / totalGDP) * 100 : 0
-              return (
-                <div key={country.country} className="flex items-center">
-                  <div className="w-32 text-sm font-medium text-gray-700">
-                    {country.country}
-                  </div>
-                  <div className="flex-1 mx-4">
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
-                        className="bg-blue-600 h-2 rounded-full"
-                        style={{ width: `${percentage}%` }}
-                      ></div>
+        <div className="space-y-3 overflow-x-auto">
+          <div className="min-w-[350px]">
+            {countriesData
+              .sort((a, b) => b.gdp - a.gdp)
+              .slice(0, 10)
+              .map((country) => {
+                const percentage = totalGDP > 0 ? (country.gdp / totalGDP) * 100 : 0
+                return (
+                  <div key={country.country} className="flex items-center">
+                    <div className="w-32 text-sm font-medium text-gray-700">
+                      {country.country}
+                    </div>
+                    <div className="flex-1 mx-4">
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-blue-600 h-2 rounded-full"
+                          style={{ width: `${percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div className="w-20 text-sm text-gray-600 text-right">
+                      {percentage.toFixed(1)}%
                     </div>
                   </div>
-                  <div className="w-20 text-sm text-gray-600 text-right">
-                    {percentage.toFixed(1)}%
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+          </div>
         </div>
       </div>
     </div>

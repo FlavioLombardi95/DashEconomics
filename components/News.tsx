@@ -4,11 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Newspaper, RefreshCw, ExternalLink } from 'lucide-react'
 import { getEconomicNews, NewsItem } from '../lib/api'
 
-interface NewsProps {
-  onNavigateToSection?: (section: string) => void
-}
-
-export default function News({ onNavigateToSection }: NewsProps) {
+export default function News() {
   const [newsData, setNewsData] = useState<NewsItem[]>([])
   const [filteredNews, setFilteredNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -48,25 +44,9 @@ export default function News({ onNavigateToSection }: NewsProps) {
   }
 
   const handleNewsClick = (news: NewsItem) => {
-    // Naviga alla sezione appropriata della dashboard
-    if (onNavigateToSection) {
-      switch (news.category) {
-        case 'Politica Monetaria':
-        case 'Crescita':
-          onNavigateToSection('overview')
-          break
-        case 'Industria':
-          onNavigateToSection('industries')
-          break
-        case 'Export':
-          onNavigateToSection('exports')
-          break
-        case 'Import':
-          onNavigateToSection('imports')
-          break
-        default:
-          onNavigateToSection('overview')
-      }
+    // Apre l'URL della notizia in una nuova tab
+    if (news.url && news.url !== '#') {
+      window.open(news.url, '_blank', 'noopener,noreferrer')
     }
   }
 
@@ -86,24 +66,25 @@ export default function News({ onNavigateToSection }: NewsProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <h1 className="text-3xl font-bold text-gray-900">Notizie Economiche</h1>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full sm:w-auto">
           <button
             onClick={fetchNews}
-            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
           >
             <RefreshCw className="w-4 h-4" />
             Aggiorna
           </button>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 hidden sm:block">
             Ultimo aggiornamento: {lastUpdate}
           </div>
         </div>
+        <div className="text-xs text-gray-500 sm:hidden w-full text-right">Ultimo aggiornamento: {lastUpdate}</div>
       </div>
 
       {/* Filtri */}
-      <div className="card flex flex-col md:flex-row gap-4">
+      <div className="card flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
           <label className="block text-sm font-medium text-gray-700 mb-2">Paese</label>
           <select
@@ -143,7 +124,7 @@ export default function News({ onNavigateToSection }: NewsProps) {
       </div>
 
       {/* Lista notizie */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {filteredNews.length === 0 && (
           <div className="col-span-2 text-center text-gray-500">
             {newsData.length === 0 ? 'Nessuna notizia disponibile.' : 'Nessuna notizia trovata con i filtri selezionati.'}
@@ -169,7 +150,7 @@ export default function News({ onNavigateToSection }: NewsProps) {
               Fonte: {news.source}
             </div>
             <div className="text-xs text-blue-600 font-medium">
-              Clicca per vedere i dati correlati →
+              Clicca per leggere la notizia completa →
             </div>
           </div>
         ))}
@@ -178,7 +159,7 @@ export default function News({ onNavigateToSection }: NewsProps) {
       {/* Statistiche */}
       <div className="card">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Statistiche Notizie</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-600">{newsData.length}</div>
             <div className="text-sm text-gray-600">Notizie totali</div>

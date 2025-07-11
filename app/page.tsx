@@ -22,17 +22,21 @@ export default function Dashboard() {
       case 'imports':
         return <Imports />
       case 'news':
-        return <News onNavigateToSection={setActiveSection} />
+        return <News />
       default:
         return <Overview />
     }
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
-      <main className="flex-1 overflow-auto p-6">
-        <div className="max-w-7xl mx-auto">
+    <div className="flex h-screen bg-gray-50 md:flex-row flex-col">
+      {/* Sidebar: visibile solo su md+ */}
+      <div className="hidden md:block">
+        <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
+      </div>
+      {/* Sidebar mobile gestita internamente dal componente Sidebar */}
+      <main className="flex-1 overflow-auto p-2 sm:p-4 md:p-6">
+        <div className="max-w-7xl mx-auto w-full">
           {renderSection()}
         </div>
       </main>

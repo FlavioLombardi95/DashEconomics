@@ -138,9 +138,9 @@ export default function Imports() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <h1 className="text-3xl font-bold text-gray-900">Import</h1>
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 w-full sm:w-auto text-right sm:text-left">
           Ultimo aggiornamento: {new Date().toLocaleDateString('it-IT')}
         </div>
       </div>
@@ -192,7 +192,7 @@ export default function Imports() {
       </div>
 
       {/* Grafico */}
-      <div className="card">
+      <div className="card overflow-x-auto">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">
           Top 10 Categorie di Import - {selectedCountry}
         </h2>

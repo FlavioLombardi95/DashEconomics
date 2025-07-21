@@ -22,13 +22,20 @@ export default function Industries() {
     setLoading(true)
     try {
       const code = countryCodes[selectedCountry]
+      console.log('Paese selezionato:', selectedCountry, 'Codice:', code)
+      
       if (code) {
         const data = await getIndustryData(code)
+        console.log('Dati ricevuti:', data)
         setCurrentData(data)
         setLastUpdate(new Date().toLocaleString('it-IT'))
+      } else {
+        console.error('Codice paese non trovato per:', selectedCountry)
+        setCurrentData([])
       }
     } catch (error) {
       console.error('Errore nel caricamento dati industrie:', error)
+      setCurrentData([])
     } finally {
       setLoading(false)
     }
@@ -119,6 +126,13 @@ export default function Industries() {
         {currentData.length > 0 && (
           <div className="mb-4 text-sm text-gray-600">
             Fonte: {currentData[0]?.source} | Ultimo aggiornamento: {currentData[0]?.lastUpdated}
+          </div>
+        )}
+        
+        {currentData.length === 0 && !loading && (
+          <div className="text-center py-8">
+            <p className="text-gray-500 mb-2">Nessun dato disponibile per {selectedCountry}</p>
+            <p className="text-sm text-gray-400">Prova a selezionare un altro paese o aggiorna i dati</p>
           </div>
         )}
         

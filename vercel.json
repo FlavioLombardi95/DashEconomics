@@ -43,5 +43,9 @@
         }
       ]
     }
-  ]
+  ],
+  "github": {
+    "enabled": true,
+    "silent": false
+  }
 } 

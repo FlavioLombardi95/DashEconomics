@@ -31,11 +31,11 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
     <>
       {/* Hamburger menu visibile solo su mobile */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-full shadow-lg border border-gray-200"
+        className="md:hidden fixed top-4 left-4 z-50 p-3 bg-white rounded-full shadow-lg border border-gray-200 hover:bg-gray-50"
         onClick={() => setSidebarOpen(true)}
         aria-label="Apri menu"
       >
-        <svg className="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
       </button>
 
       {/* Overlay e sidebar mobile */}
@@ -44,7 +44,7 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
         onClick={() => setSidebarOpen(false)}
       />
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg border-r border-gray-200 z-50 transform transition-transform duration-200 md:relative md:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:block`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg border-r border-gray-200 z-50 transform transition-transform duration-200 md:relative md:translate-x-0 md:block ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="p-6 flex items-center justify-between md:block">
           <div>
@@ -78,6 +78,13 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
             )
           })}
         </nav>
+        
+        {/* Indicatore mobile della sezione attiva */}
+        <div className="md:hidden mt-6 p-4 bg-blue-50 rounded-lg mx-4">
+          <div className="text-sm text-blue-700 font-medium">
+            Sezione attiva: {menuItems.find(item => item.id === activeSection)?.label}
+          </div>
+        </div>
         <div className="absolute bottom-6 left-6 right-6">
           <div className="text-xs text-gray-500 text-center">
             © 2024 Global Economic Dashboard

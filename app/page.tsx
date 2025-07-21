@@ -30,12 +30,9 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen bg-gray-50 md:flex-row flex-col">
-      {/* Sidebar: visibile solo su md+ */}
-      <div className="hidden md:block">
-        <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
-      </div>
-      {/* Sidebar mobile gestita internamente dal componente Sidebar */}
-      <main className="flex-1 overflow-auto p-3 sm:p-4 md:p-6">
+      {/* Sidebar: sempre presente per gestire mobile e desktop */}
+      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
+      <main className="flex-1 overflow-auto p-3 sm:p-4 md:p-6 md:ml-0">
         <div className="max-w-7xl mx-auto w-full">
           {renderSection()}
         </div>

@@ -144,7 +144,7 @@ export default function Industries() {
                   {industry.name}
                 </div>
                 <div className="flex-1 mx-4">
-                  <div className="w-full bg-gray-200 rounded-full h-6">
+                  <div className="w-full bg-gray-200 rounded-full h-6 relative">
                     <div
                       className="h-6 rounded-full flex items-center justify-end pr-2"
                       style={{ 
@@ -153,6 +153,12 @@ export default function Industries() {
                       }}
                     >
                       <span className="text-white text-xs font-medium">
+                        {industry.value}%
+                      </span>
+                    </div>
+                    {/* Percentuale sempre visibile a destra */}
+                    <div className="absolute right-0 top-0 h-6 flex items-center pr-2">
+                      <span className="text-gray-700 text-xs font-medium">
                         {industry.value}%
                       </span>
                     </div>

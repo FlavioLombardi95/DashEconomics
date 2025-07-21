@@ -35,7 +35,7 @@ export default function Dashboard() {
         <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
       </div>
       {/* Sidebar mobile gestita internamente dal componente Sidebar */}
-      <main className="flex-1 overflow-auto p-2 sm:p-4 md:p-6">
+      <main className="flex-1 overflow-auto p-3 sm:p-4 md:p-6">
         <div className="max-w-7xl mx-auto w-full">
           {renderSection()}
         </div>

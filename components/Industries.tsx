@@ -68,12 +68,12 @@ export default function Industries() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-        <h1 className="text-3xl font-bold text-gray-900">Industrie Principali</h1>
-        <div className="flex items-center gap-4 w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Industrie Principali</h1>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <button
             onClick={fetchIndustryData}
-            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto text-sm font-medium"
           >
             <RefreshCw className="w-4 h-4" />
             Aggiorna
@@ -82,20 +82,20 @@ export default function Industries() {
             Ultimo aggiornamento: {lastUpdate}
           </div>
         </div>
-        <div className="text-xs text-gray-500 sm:hidden w-full text-right">Ultimo aggiornamento: {lastUpdate}</div>
+        <div className="text-xs text-gray-500 sm:hidden w-full text-center">Ultimo aggiornamento: {lastUpdate}</div>
       </div>
 
       {/* Controlli */}
       <div className="card">
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
               Seleziona Paese
             </label>
             <select
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 text-base"
             >
               {countries.map((country) => (
                 <option key={country} value={country} className="text-gray-900">
@@ -103,30 +103,30 @@ export default function Industries() {
                 </option>
               ))}
             </select>
-            <div className="mt-1 text-xs text-gray-500">
+            <div className="mt-2 text-xs text-gray-500">
               Paese attuale: {selectedCountry}
             </div>
           </div>
           
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
               Tipo di Grafico
             </label>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {chartTypes.map((type) => (
                 <button
                   key={type}
                   onClick={() => setChartType(type)}
-                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex flex-col items-center px-3 py-3 rounded-md text-sm font-medium transition-colors ${
                     chartType === type
                       ? 'bg-blue-100 text-blue-700'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {type === 'bar' && <BarChart3 className="w-4 h-4 mr-1" />}
-                  {type === 'pie' && <PieChart className="w-4 h-4 mr-1" />}
-                  {type === 'area' && <TrendingUp className="w-4 h-4 mr-1" />}
-                  {type.charAt(0).toUpperCase() + type.slice(1)}
+                  {type === 'bar' && <BarChart3 className="w-5 h-5 mb-1" />}
+                  {type === 'pie' && <PieChart className="w-5 h-5 mb-1" />}
+                  {type === 'area' && <TrendingUp className="w-5 h-5 mb-1" />}
+                  <span className="text-xs">{type.charAt(0).toUpperCase() + type.slice(1)}</span>
                 </button>
               ))}
             </div>
@@ -167,14 +167,14 @@ export default function Industries() {
         )}
         
         {chartType === 'bar' && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {currentData.map((industry) => (
-              <div key={industry.name} className="flex items-center">
-                <div className="w-48 text-sm font-medium text-gray-700">
+              <div key={industry.name} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <div className="w-full sm:w-48 text-sm font-medium text-gray-700 min-w-0">
                   {industry.name}
                 </div>
-                <div className="flex-1 mx-4">
-                  <div className="w-full bg-gray-200 rounded-full h-6 relative">
+                <div className="flex-1">
+                  <div className="w-full bg-gray-200 rounded-full h-6 sm:h-6 relative">
                     <div
                       className="h-6 rounded-full flex items-center justify-end pr-2"
                       style={{ 
@@ -200,9 +200,9 @@ export default function Industries() {
         )}
 
         {chartType === 'pie' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="flex justify-center">
-              <div className="relative w-64 h-64">
+              <div className="relative w-48 h-48 sm:w-64 sm:h-64">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
                   {currentData.map((industry, index) => {
                     const previousValues = currentData
@@ -232,18 +232,18 @@ export default function Industries() {
               </div>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-3">
               {currentData.map((industry) => (
                 <div key={industry.name} className="flex items-center">
                   <div
-                    className="w-4 h-4 rounded mr-3"
+                    className="w-4 h-4 rounded mr-3 flex-shrink-0"
                     style={{ backgroundColor: industry.color }}
                   ></div>
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-700 flex-1 min-w-0 truncate">
                     {industry.name}
                   </span>
-                  <span className="ml-auto text-sm text-gray-600">
-                    {industry.value}%
+                  <span className="ml-2 text-sm text-gray-600 font-medium">
+                    {industry.value.toFixed(1)}%
                   </span>
                 </div>
               ))}
@@ -254,11 +254,11 @@ export default function Industries() {
         {chartType === 'area' && (
           <div className="space-y-4">
             {currentData.map((industry) => (
-              <div key={industry.name} className="flex items-center">
-                <div className="w-48 text-sm font-medium text-gray-700">
+              <div key={industry.name} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <div className="w-full sm:w-48 text-sm font-medium text-gray-700 min-w-0">
                   {industry.name}
                 </div>
-                <div className="flex-1 mx-4">
+                <div className="flex-1">
                   <div className="relative">
                     <div
                       className="h-8 rounded-lg"
@@ -277,8 +277,8 @@ export default function Industries() {
                     ></div>
                   </div>
                 </div>
-                <div className="w-16 text-sm text-gray-600 text-right">
-                  {industry.value}%
+                <div className="w-full sm:w-16 text-sm text-gray-600 sm:text-right font-medium">
+                  {industry.value.toFixed(1)}%
                 </div>
               </div>
             ))}
@@ -289,18 +289,18 @@ export default function Industries() {
       {/* Statistiche aggiuntive */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Industria Dominante</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Industria Dominante</h3>
           <div className="flex items-center">
-            <Factory className="w-8 h-8 text-blue-600 mr-3" />
-            <div>
-              <p className="font-medium text-gray-900">{currentData[0]?.name || 'N/A'}</p>
-              <p className="text-sm text-gray-600">{currentData[0]?.value || 0}% del PIL</p>
+            <Factory className="w-8 h-8 text-blue-600 mr-3 flex-shrink-0" />
+            <div className="min-w-0 flex-1">
+              <p className="font-medium text-gray-900 truncate">{currentData[0]?.name || 'N/A'}</p>
+              <p className="text-sm text-gray-600">{(currentData[0]?.value || 0).toFixed(1)}% del PIL</p>
             </div>
           </div>
         </div>
 
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Diversificazione</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Diversificazione</h3>
           <div className="text-2xl font-bold text-green-600">
             {currentData.length}
           </div>
@@ -308,12 +308,12 @@ export default function Industries() {
         </div>
 
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Top 3 Settori</h3>
-          <div className="space-y-1">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">Top 3 Settori</h3>
+          <div className="space-y-2">
             {currentData.slice(0, 3).map((industry) => (
               <div key={industry.name} className="flex justify-between text-sm">
-                <span className="text-gray-700">{industry.name}</span>
-                <span className="font-medium text-gray-900">{industry.value.toFixed(1)}%</span>
+                <span className="text-gray-700 flex-1 min-w-0 truncate mr-2">{industry.name}</span>
+                <span className="font-medium text-gray-900 flex-shrink-0">{industry.value.toFixed(1)}%</span>
               </div>
             ))}
           </div>

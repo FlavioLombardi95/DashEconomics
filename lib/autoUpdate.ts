@@ -112,6 +112,8 @@ export class AutoUpdateManager {
   }
 }
 
+import React from 'react'
+
 // Hook React per utilizzare il sistema di aggiornamento automatico
 export function useAutoUpdate() {
   const [updateInfo, setUpdateInfo] = React.useState<UpdateInfo>({

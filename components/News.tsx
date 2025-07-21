@@ -46,7 +46,17 @@ export default function News() {
   const handleNewsClick = (news: NewsItem) => {
     // Apre l'URL della notizia in una nuova tab
     if (news.url && news.url !== '#') {
-      window.open(news.url, '_blank', 'noopener,noreferrer')
+      try {
+        // Verifica se l'URL è valido prima di aprirlo
+        const url = new URL(news.url)
+        window.open(news.url, '_blank', 'noopener,noreferrer')
+      } catch (error) {
+        console.error('URL non valido:', news.url)
+        // Mostra un messaggio all'utente
+        alert(`Link non disponibile per: ${news.title}\n\nFonte: ${news.source}`)
+      }
+    } else {
+      alert(`Link non disponibile per: ${news.title}\n\nFonte: ${news.source}`)
     }
   }
 
@@ -139,7 +149,10 @@ export default function News() {
             <div className="flex items-center gap-2">
               <Newspaper className="w-5 h-5 text-blue-600" />
               <span className="font-semibold text-gray-900">{news.title}</span>
-              <ExternalLink className="w-4 h-4 text-gray-400 ml-auto" />
+              <div className="ml-auto flex items-center gap-1">
+                <span className="text-xs text-gray-500">Sito ufficiale</span>
+                <ExternalLink className="w-4 h-4 text-gray-400" />
+              </div>
             </div>
             <div className="flex gap-4 text-xs text-gray-500">
               <span>{news.country}</span>
@@ -150,7 +163,7 @@ export default function News() {
               Fonte: {news.source}
             </div>
             <div className="text-xs text-blue-600 font-medium">
-              Clicca per leggere la notizia completa →
+              Clicca per visitare il sito ufficiale →
             </div>
           </div>
         ))}

@@ -66,8 +66,8 @@ Una dashboard web interattiva e responsive per monitorare le 20 economie più gr
 
 ```bash
 # Clona il repository
-git clone <repository-url>
-cd DashEconomics-main
+git clone https://github.com/FlavioLombardi95/DashEconomics.git
+cd DashEconomics
 
 # Installa le dipendenze
 npm install
@@ -156,4 +156,4 @@ MIT License - vedi [LICENSE](LICENSE) per dettagli.
 
 **Autore**: Flavio Enrico Lombardi  
 **Versione**: 1.0.0  
-**Ultimo Aggiornamento**: Gennaio 2024 
+**Ultimo Aggiornamento**: Gennaio 2024

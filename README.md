@@ -159,3 +159,4 @@ MIT License - vedi [LICENSE](LICENSE) per dettagli.
 **Ultimo Aggiornamento**: Luglio 2025
 # Test webhook Mon Jul 21 16:53:29 CEST 2025
 # Test webhook manuale Mon Jul 21 16:59:57 CEST 2025
+# Test webhook URL corretto Mon Jul 21 17:02:12 CEST 2025

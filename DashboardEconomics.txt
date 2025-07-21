@@ -1,0 +1,65 @@
+Prompt completo per AI – Global Economic Dashboard
+
+Realizza una dashboard web interattiva che monitora in tempo reale le 20 economie più grandi al mondo. La dashboard deve essere organizzata in più sezioni o pagine e presentare i dati in modo visivamente chiaro, ordinato e facilmente navigabile, seguendo uno stile semplice come quello mostrato negli screenshot allegati (es. layout con sidebar, pannelli riassuntivi e grafici puliti).
+
+Struttura della dashboard:
+1. Panoramica globale
+Mostra:
+
+Numero totale di paesi analizzati
+
+PIL totale combinato
+
+Popolazione totale
+
+PIL medio pro capite
+
+Evidenzia le Top 5 economie per PIL (valore assoluto + per capita).
+
+2. Industrie principali
+Per ciascun paese, visualizza le 10 industrie più importanti per contributo economico.
+
+Includi grafici (bar chart, pie chart, area chart selezionabili).
+
+Layout simile alla seconda screenshot fornita.
+
+3. Export
+Mostra le 10 principali categorie di esportazione per ogni paese.
+
+Includi grafici interattivi, con possibilità di selezionare il tipo (bar, pie, area).
+
+Segui il layout chiaro come da esempio fornito (terza screenshot).
+
+4. Import
+Identico alla sezione export, ma per le 10 principali categorie di importazione.
+
+5. Notizie economiche
+Raccogli i titoli delle ultime notizie economiche e industriali per ciascun paese.
+
+Visualizza i titoli in formato lista o schede, con possibilità di filtro per parole chiave o categoria.
+
+Grafici:
+Ogni sezione (Industrie, Export, Import) deve includere grafici interattivi per facilitare la lettura e il confronto dei dati. L’utente deve poter cambiare tipologia di grafico (bar chart, pie chart, area chart) e selezionare il paese da un menu a tendina.
+
+Fonti dati:
+Utilizza le seguenti fonti per ottenere dati affidabili e aggiornati:
+
+World Bank – https://data.worldbank.org
+
+IMF (International Monetary Fund) – https://www.imf.org
+
+UN Comtrade – https://comtrade.un.org
+
+OECD – https://data.oecd.org
+
+CIA World Factbook – https://www.cia.gov/the-world-factbook/
+
+News API (es. Google News API, Bing News, RSS feed da Reuters, Bloomberg, FT)
+
+Design:
+Interfaccia pulita, semplice e moderna.
+
+Layout ispirato agli screenshot forniti: sidebar di navigazione a sinistra, contenuti principali centrati e ben separati.
+
+Pannelli informativi compatti, testi leggibili e grafici ben distanziati.
+

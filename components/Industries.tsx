@@ -133,6 +133,12 @@ export default function Industries() {
           <div className="text-center py-8">
             <p className="text-gray-500 mb-2">Nessun dato disponibile per {selectedCountry}</p>
             <p className="text-sm text-gray-400">Prova a selezionare un altro paese o aggiorna i dati</p>
+            <div className="mt-4 p-4 bg-gray-100 rounded-lg text-left">
+              <p className="text-sm text-gray-600">Debug info:</p>
+              <p className="text-xs text-gray-500">Paese selezionato: {selectedCountry}</p>
+              <p className="text-xs text-gray-500">Codice paese: {countryCodes[selectedCountry] || 'Non trovato'}</p>
+              <p className="text-xs text-gray-500">Dati caricati: {currentData.length}</p>
+            </div>
           </div>
         )}
         

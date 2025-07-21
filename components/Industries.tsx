@@ -18,6 +18,13 @@ export default function Industries() {
     fetchIndustryData()
   }, [selectedCountry])
 
+  // Carica i dati iniziali quando il componente si monta
+  useEffect(() => {
+    if (currentData.length === 0 && !loading) {
+      fetchIndustryData()
+    }
+  }, [])
+
   const fetchIndustryData = async () => {
     setLoading(true)
     try {
@@ -27,8 +34,15 @@ export default function Industries() {
       if (code) {
         const data = await getIndustryData(code)
         console.log('Dati ricevuti:', data)
-        setCurrentData(data)
-        setLastUpdate(new Date().toLocaleString('it-IT'))
+        
+        // Verifica che i dati siano validi
+        if (data && data.length > 0) {
+          setCurrentData(data)
+          setLastUpdate(new Date().toLocaleString('it-IT'))
+        } else {
+          console.warn('Nessun dato ricevuto per:', selectedCountry)
+          setCurrentData([])
+        }
       } else {
         console.error('Codice paese non trovato per:', selectedCountry)
         setCurrentData([])
@@ -138,7 +152,14 @@ export default function Industries() {
               <p className="text-xs text-gray-500">Paese selezionato: {selectedCountry}</p>
               <p className="text-xs text-gray-500">Codice paese: {countryCodes[selectedCountry] || 'Non trovato'}</p>
               <p className="text-xs text-gray-500">Dati caricati: {currentData.length}</p>
+              <p className="text-xs text-gray-500">Stato loading: {loading ? 'Caricamento...' : 'Completato'}</p>
             </div>
+            <button
+              onClick={fetchIndustryData}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Riprova
+            </button>
           </div>
         )}
         
@@ -154,18 +175,18 @@ export default function Industries() {
                     <div
                       className="h-6 rounded-full flex items-center justify-end pr-2"
                       style={{ 
-                        width: `${industry.value * 2}%`,
+                        width: `${Math.min(industry.value * 2, 100)}%`,
                         backgroundColor: industry.color 
                       }}
                     >
                       <span className="text-white text-xs font-medium">
-                        {industry.value}%
+                        {industry.value.toFixed(1)}%
                       </span>
                     </div>
                     {/* Percentuale sempre visibile a destra */}
                     <div className="absolute right-0 top-0 h-6 flex items-center pr-2">
                       <span className="text-gray-700 text-xs font-medium">
-                        {industry.value}%
+                        {industry.value.toFixed(1)}%
                       </span>
                     </div>
                   </div>

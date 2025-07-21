@@ -156,4 +156,4 @@ MIT License - vedi [LICENSE](LICENSE) per dettagli.
 
 **Autore**: Flavio Enrico Lombardi  
 **Versione**: 1.0.0  
-**Ultimo Aggiornamento**: Gennaio 2024
+**Ultimo Aggiornamento**: Luglio 2025
